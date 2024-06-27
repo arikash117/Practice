@@ -13,7 +13,14 @@ for vacancy in vacancies:
 
 # area list
 area_list = []
-areas = response.json()['items']
-for area in areas:
+for area in vacancies:
     name = area['area']['name']
     area_list.append(name)
+
+
+# schedule list
+schedule_list = []
+for schedule in vacancies:
+    name = schedule['schedule']['name']
+    schedule_list.append(name)
+    
