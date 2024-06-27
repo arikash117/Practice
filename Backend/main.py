@@ -30,4 +30,11 @@ employment_list = []
 for employment in vacancies:
     name = employment['employment']['name']
     employment_list.append(name)
-print(employment_list)
+
+
+# experience list
+experience_list = []
+for experience in vacancies:
+    name = experience['experience']['name']
+    experience_list.append(name)
+
