@@ -23,4 +23,11 @@ schedule_list = []
 for schedule in vacancies:
     name = schedule['schedule']['name']
     schedule_list.append(name)
-    
+
+
+# employment list
+employment_list = []
+for employment in vacancies:
+    name = employment['employment']['name']
+    employment_list.append(name)
+print(employment_list)
