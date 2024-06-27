@@ -13,7 +13,7 @@ for vacancy in vacancies:
 # vacancy id list
 vacancy_id_list = []
 for vacancy_id in vacancies:
-    name = vacancy_id['name']
+    name = vacancy_id['id']
     vacancy_id_list.append(name)
 
 
