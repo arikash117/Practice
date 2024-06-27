@@ -38,3 +38,10 @@ for experience in vacancies:
     name = experience['experience']['name']
     experience_list.append(name)
 
+
+# employer list
+employer_list = []
+for employer in vacancies:
+    name = employer['employer']['name']
+    employer_list.append(name)
+
