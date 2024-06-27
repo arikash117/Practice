@@ -10,6 +10,12 @@ for vacancy in vacancies:
     name = vacancy['name']
     vacancy_list.append(name)
 
+# vacancy id list
+vacancy_id_list = []
+for vacancy_id in vacancies:
+    name = vacancy_id['name']
+    vacancy_id_list.append(name)
+
 
 # area list
 area_list = []
