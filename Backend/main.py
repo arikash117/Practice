@@ -1,5 +1,5 @@
 import requests
-from config import settings
+from settings.config import settings
 
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
