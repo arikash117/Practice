@@ -2,4 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    db_url: str = 'mysql+pymsql://root:root@localhost:8000/Vacancies_data'
+    db_url: str = 'mysql+pymysql://root:root@localhost:3306/Vacancies_data'
+
+
+settings = Settings()
