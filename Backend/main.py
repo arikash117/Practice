@@ -10,7 +10,7 @@ response = requests.get('https://api.hh.ru/vacancies')
 engine = create_engine(settings.db_url)
 Base = declarative_base()
 
-class infoVacancyTable(Base):
+class Table(Base):
     __tablename__ = 'Vacancies_data'
     id = Column(Integer, primary_key=True)
     area = Column(String(100), nullable=False)
