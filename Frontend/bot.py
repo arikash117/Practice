@@ -4,7 +4,7 @@ import logging
 from aiogram import Bot
 from aiogram import Dispatcher
 
-from Backend.config import settings
+from settings.config import settings
 from routers import router as main_router
 
 dp = Dispatcher()
@@ -19,5 +19,5 @@ async def main():
     await dp.start_polling(bot)
 
 
-if __name__ = '__name__':
+if __name__ == '__name__':
     asyncio.run(main())
