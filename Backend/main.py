@@ -12,6 +12,7 @@ Base = declarative_base()
 class Table(Base):
     __tablename__ = 'Vacancies_data'
     id = Column(Integer, primary_key=True)
+    vacancy = Column(String(100), nullable=False)
     area = Column(String(100), nullable=False)
     schedule = Column(String(100), nullable=False)
     employer = Column(String(100), nullable=False)
