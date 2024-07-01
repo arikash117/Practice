@@ -27,4 +27,3 @@ for vacancy in vacancies:
     schedule = vacancy['schedule']['name']
     employer = vacancy['employer']['name']
     experience = vacancy['experience']['name']
-
