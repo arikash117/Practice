@@ -33,3 +33,12 @@ async def handler_help(message: types.Message):
                         "\n/search - searchings vacancies"
                         "\n/info - search"
                         )
+
+
+@router.message(Command('cancel'))
+async def cancel_cmd(message: types.Message, state: FSMContext):
+    current_state = state.set_state()
+    if current_state is None:
+        return
+    await message.reply('CANCELED')
+    await state.clear()
