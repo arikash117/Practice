@@ -1,5 +1,4 @@
 import requests
-# from settings.config import settings
 
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
@@ -7,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 response = requests.get('https://api.hh.ru/vacancies')
-engine = create_engine(settings.db_url)
+engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/vacancies_data')
 Base = declarative_base()
 
 class Table(Base):
