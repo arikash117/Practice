@@ -22,6 +22,8 @@ class Table(Base):
 Base.metadata.create_all(engine)
 
 def searching_vac(vac_name, query):
+    Base.drop_all()
+    Base.create_all()
     response = requests.get('https://api.hh.ru/vacancies')
     vacancy_flt = vac_name.lower()
     filtered_vacancies = []
