@@ -4,6 +4,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
+from Backend.main import searching_vac
 
 class Form(StatesGroup):
     first = State()
@@ -26,5 +27,6 @@ async def procces_first(message: types.Message, state: FSMContext):
     )
     await state.update_data(name=message.text)
     await state.set_state(Form.sch_vacancy)
-
+    vacancy_list = searching_vac(message.text)
+    await message.answer(f"Look i found {len(vacancy_list)} vacancies, here they are:\n{'\n'.join(vacancy_list)}")
     await state.set_state(Form.first)
