@@ -19,7 +19,7 @@ async def handler_start(message: types.Message):
     ]
 
     ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
-    await message.reply(text='Hi! This is your helper for searching hh.ru vacancies!!! Type /help for for help)')
+    await message.reply(text='Здравствуйте, это ваш бот-помощник для поиска ваканский! Вывести справку - /help)')
     await message.reply_sticker(sticker='CAACAgIAAxkBAAEGizlmgZbS7tRx_pTFXwcxi6hvjY9VDgACAQEAAladvQoivp8OuMLmNDUE')
 
 
@@ -27,11 +27,11 @@ async def handler_start(message: types.Message):
 @router.message(Command('help'))
 async def handler_help(message: types.Message):
     await message.reply(text="This is command list"
-                        "\n/start - start bot"
-                        "\n/help - call help"
-                        "\n/cancel - cancel the action"
-                        "\n/search - searchings vacancies"
-                        "\n/info - get information about vacancies"
+                        "\n/start - запустить бота"
+                        "\n/help - вызвать справку"
+                        "\n/cancel - отменить текущее действие"
+                        "\n/search - найти вакансии по запросу"
+                        "\n/info - получить информацию о вакансиях"
                         )
 
 

@@ -26,7 +26,7 @@ async def handler_search(message: types.Message, state: FSMContext):
     await state.set_state(Form.first)
     id_user = message.from_user.id
     dictionary[id_user] = 0
-    await message.answer("About which vacancy you want to see more information?")
+    await message.answer("О какой вакансии вы бы хотели получить больше информации?")
 
 @router.message(Form.first)
 async def procces_first(message: types.Message, state: FSMContext):
