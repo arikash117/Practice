@@ -40,5 +40,5 @@ async def cancel_cmd(message: types.Message, state: FSMContext):
     current_state = state.set_state()
     if current_state is None:
         return
-    await message.reply('CANCELED')
+    await message.reply('Отменено')
     await state.clear()
