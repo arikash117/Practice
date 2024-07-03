@@ -24,15 +24,26 @@ async def ikb_updated(text: str):
 @router.message(Command('info'))
 async def handler_search(message: types.Message, state: FSMContext):
     await state.set_state(Form.first)
-    id_user = message.from_user.id
-    dictionary[id_user] = 0
     await message.answer("О какой вакансии вы бы хотели получить больше информации?")
 
 @router.message(Form.first)
 async def procces_first(message: types.Message, state: FSMContext):
     await state.update_data(name=message.text)
     await state.set_state(Form.info_vacancy)
-    vacancy_info_list = searching_vac(message.text, query='all')
-    await message.answer(
-        f""
-    )
+
+    id_user = message.from_user.id
+    dictionary[id_user] = 0
+    vacancy_info = searching_vac(message.text, query='all')
+    vacancy_info_list = vacancy_info[id_user]
+    await message.answer(text=f"{vacancy_info_list[0]}\nГород: {vacancy_info_list[1]}\nЗанятость: {vacancy_info_list[2]}\nКомпания: {vacancy_info_list[3]}\nОпыт работы: {vacancy_info_list[4]}")
+
+
+@router.callback_query(F.data == 'previous')
+async def callback_previous(callback_query: CallbackQuery):
+    id_user = callback_query.from_user.id
+    vacancy = callback_query.message.id
+    if dictionary[id_user] == 0:
+        vacancy_info = searching_vac(vacancy, query='all')
+        await callback_query.message.edit_text(
+
+        )
