@@ -55,6 +55,10 @@ def searching_vac(vac_name, query):
     if query == 'all':
         return filtered_vacancies
     else:
-        return [v.schedule for v in filtered_vacancies]
+        filtered_vacancies_list = []
+        for x in filtered_vacancies:
+            filtered_vacancies = [x['name'], x['area'], x['schedule'], x['employer'], x['experience']]
+            filtered_vacancies_list.append(filtered_vacancies)
+        return filtered_vacancies_list
         
 print(searching_vac('Менеджер', query=None))
