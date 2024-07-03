@@ -59,10 +59,6 @@ def searching_vac(vac_name, query):
             filtered_vacancies_list.append(filtered_vacancies)
         return filtered_vacancies_list
     else:
-        filtered_vacancies_list = []
-        for x in filtered_vacancies:
-            filtered_vacancies = [x['name']]
-            filtered_vacancies_list.append(filtered_vacancies)
+        filtered_vacancies_list = [x['name'] for x in filtered_vacancies]
         return filtered_vacancies_list
         
-print(searching_vac('Менеджер', query=None))
