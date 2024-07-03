@@ -1,31 +1,30 @@
 import requests
-import mysql.connector
 
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy import create_engine, Column, Integer, String, MetaData
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 
 engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/vacancies_data')
 Base = declarative_base()
+metadata = MetaData()
 
 class Table(Base):
-    __tablename__ = 'Vacancies_data'
-    id = Column(Integer, primary_key=True)
-    vacancy = Column(String(100), nullable=False)
+    __tablename__ = 'data'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100), nullable=False)
     area = Column(String(100), nullable=False)
     schedule = Column(String(100), nullable=False)
     employer = Column(String(100), nullable=False)
     experience = Column(String(100), nullable=False)
 
-Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
+session = Session()
 
 def searching_vac(vac_name, query):
-    Base.drop_all()
-    Base.create_all()
-    response = requests.get('https://api.hh.ru/vacancies')
-    vacancy_flt = vac_name.lower()
+    Base.metadata.drop_all(engine)
+    Base.metadata.create_all(engine)
+
+    response = requests.get('https://api.hh.ru/vacancies', params={'text': vac_name})
     filtered_vacancies = []
     vacancies = response.json()['items']
     for vacancy in vacancies:
@@ -35,7 +34,6 @@ def searching_vac(vac_name, query):
         employer = vacancy['employer']['name']
         experience = vacancy['experience']['name']
 
-    if vacancy_flt in name.lower():
         new_vacancy_data = Table(
             name = name,
             area = area,
@@ -43,8 +41,7 @@ def searching_vac(vac_name, query):
             employer = employer,
             experience = experience,
         )
-        Base.session.add(new_vacancy_data)
-        Base.session.commit()
+        session.add(new_vacancy_data)
 
         filtered_vacancies.append({
             'name': name,
@@ -53,7 +50,11 @@ def searching_vac(vac_name, query):
             'employer': employer,
             'experience': experience
         })
-        if query == 'all':
-            return filtered_vacancies
-        else:
-            return filtered_vacancies(name)
+    session.commit()
+
+    if query == 'all':
+        return filtered_vacancies
+    else:
+        return [v.schedule for v in filtered_vacancies]
+        
+print(searching_vac('Менеджер', query=None))
