@@ -31,7 +31,7 @@ async def handler_help(message: types.Message):
                         "\n/help - call help"
                         "\n/cancel - cancel the action"
                         "\n/search - searchings vacancies"
-                        "\n/info - search"
+                        "\n/info - get information about vacancies"
                         )
 
 
