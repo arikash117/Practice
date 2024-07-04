@@ -1,4 +1,4 @@
-from .main import searching_vac
+from main import searching_vac
 
 __all__ = [
     "searching_vac",
