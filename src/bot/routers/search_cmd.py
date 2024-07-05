@@ -8,7 +8,6 @@ from src.backend.search import searching_vac
 class Form(StatesGroup):
     first = State()
     sch_vacancy = State()
-    info_vacancy = State()
 
 router = Router(name=__name__)
 
@@ -16,7 +15,7 @@ router = Router(name=__name__)
 @router.message(Command('search'))
 async def handler_search(message: types.Message, state: FSMContext):
     await state.set_state(Form.first)
-    await message.answer("What vacancy do you want to search?")
+    await message.answer("Какую вакансию вы хотите найти?")
 
 
 @router.message(Form.first)
@@ -27,4 +26,4 @@ async def procces_first(message: types.Message, state: FSMContext):
     vacancy_list = searching_vac(message.text, query=None)
     await message.answer(f"Нашлось {len(vacancy_list)} вакансий, Вот они:\n{'\n'.join(vacancy_list)}")
     
-    await state.set_state(Form.first)
+    await state.clear()
