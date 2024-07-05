@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
 from search_cmd import Form
-from backend import searching_vac
+from backend.search import searching_vac
 
 router = Router(name=__name__)
 dictionary = {}

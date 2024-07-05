@@ -3,7 +3,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-from backend import searching_vac
+from backend.search import searching_vac
 
 class Form(StatesGroup):
     first = State()
