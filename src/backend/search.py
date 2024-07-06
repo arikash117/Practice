@@ -61,5 +61,4 @@ def searching_vac(vac_name, query):
     else:
         filtered_vacancies_list = [x['name'] for x in filtered_vacancies]
         return filtered_vacancies_list
-        
-# print(searching_vac('Менеджер', 'all'))
+        # print(searching_vac('Менеджер', 'all'))
