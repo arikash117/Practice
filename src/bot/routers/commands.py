@@ -1,7 +1,6 @@
 from aiogram import Router, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 
 router = Router(name=__name__)
@@ -9,15 +8,6 @@ router = Router(name=__name__)
 
 @router.message(Command('start'))
 async def handler_start(message: types.Message):
-    keyboard = [
-        [KeyboardButton(text="/start")],
-        [KeyboardButton(text='/help')],
-        [KeyboardButton(text='/search')],
-        [KeyboardButton(text='/cancel')],
-        [KeyboardButton(text='/info')],
-    ]
-
-    ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
     await message.reply(text='Здравствуйте, это ваш бот-помощник для поиска ваканский! Вывести справку - /help)')
     await message.reply_sticker(sticker='CAACAgIAAxkBAAEGizlmgZbS7tRx_pTFXwcxi6hvjY9VDgACAQEAAladvQoivp8OuMLmNDUE')
 
