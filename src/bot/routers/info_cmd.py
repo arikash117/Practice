@@ -40,7 +40,7 @@ async def procces_first(message: types.Message, state: FSMContext):
     dictionary[id_user] = 0
     vacancy_info = searching_vac(words_dic[id_user], query='all')
     vacancy_info_list = vacancy_info[dictionary[id_user]]
-    print(vacancy_info_list)
+    
     await message.answer(text=f"{vacancy_info_list[0]}\nГород: {vacancy_info_list[1]}\nЗанятость: {vacancy_info_list[2]}\nКомпания: {vacancy_info_list[3]}\nОпыт работы: {vacancy_info_list[4]}", reply_markup=await ikb_updated(text=f"{dictionary[id_user]}", num=len(vacancy_info)))
 
 
