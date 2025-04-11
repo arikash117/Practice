@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from aiogram.fsm.state import StatesGroup, State
 
-from src.backend.search import searching_vac
+from backend.search import searching_vac
 
 class Time(StatesGroup):
     first = State()

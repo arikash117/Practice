@@ -4,7 +4,7 @@ import logging
 from aiogram import Bot
 from aiogram import Dispatcher
 
-from src.bot.routers import router as main_router
+from bot.routers import router as main_router
 
 dp = Dispatcher()
 dp.include_router(main_router)
