@@ -39,11 +39,11 @@ def searching_vac(vac_name, query):
         session.add(new_vacancy_data)
 
         filtered_vacancies.append({
-            'name': vacancy['name'],
-            'area': vacancy['area']['name'],
-            'schedule': vacancy['schedule']['name'],
-            'employer': vacancy['employer']['name'],
-            'experience': vacancy['experience']['name'],
+            'name': new_vacancy_data.name,
+            'area': new_vacancy_data.area,
+            'schedule': new_vacancy_data.schedule,
+            'employer': new_vacancy_data.employer,
+            'experience': new_vacancy_data.experience,
         })
     session.commit()
 
