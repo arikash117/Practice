@@ -25,10 +25,12 @@ async def ikb_updated(text: str, num: int):
     inline_keyboard = InlineKeyboardMarkup(inline_keyboard=keyboard)
     return inline_keyboard
 
+
 @router.message(Command('info'))
 async def handler_search(message: types.Message, state: FSMContext):
     await state.set_state(Time.first)
     await message.answer("О какой вакансии вы бы хотели получить больше информации?")
+
 
 @router.message(Time.first)
 async def procces_first(message: types.Message, state: FSMContext):
@@ -41,11 +43,24 @@ async def procces_first(message: types.Message, state: FSMContext):
     vacancy_info = searching_vac(words_dic[id_user], query='all')
     vacancy_info_list = vacancy_info[dictionary[id_user]]
     
-    await message.answer(text=f"{vacancy_info_list[0]}\nГород: {vacancy_info_list[1]}\nЗанятость: {vacancy_info_list[2]}\nКомпания: {vacancy_info_list[3]}\nОпыт работы: {vacancy_info_list[4]}", reply_markup=await ikb_updated(text=f"{dictionary[id_user]}", num=len(vacancy_info)))
+    await message.answer(
+        text = (
+            f"{vacancy_info_list[0]}\n"
+            f"Город: {vacancy_info_list[1]}\n"
+            f"Занятость: {vacancy_info_list[2]}\n"
+            f"Компания: {vacancy_info_list[3]}\n"
+            f"Опыт работы: {vacancy_info_list[4]}"
+        ),
+        reply_markup = await ikb_updated(
+            text=f"{dictionary[id_user]}",
+            num=len(vacancy_info)
+        )
+    )
 
 
 @router.callback_query(F.data == 'previous')
 async def callback_previous(callback_query: CallbackQuery):
+
     id_user = callback_query.from_user.id
     vacancy = words_dic[id_user]
     vacancy_info = searching_vac(vacancy, query='all')
@@ -53,20 +68,39 @@ async def callback_previous(callback_query: CallbackQuery):
     if dictionary[id_user] == 0:
         vacancy_info_list = vacancy_info[len(vacancy_info)-1]
 
-        await callback_query.message.edit_text(text=f"{vacancy_info_list[0]}\nГород: {vacancy_info_list[1]}\nЗанятость: {vacancy_info_list[2]}\nКомпания: {vacancy_info_list[3]}\nОпыт работы: {vacancy_info_list[4]}",
-                                                
-        reply_markup=await ikb_updated(text=f"{len(vacancy_info)}", num=len(vacancy_info))
+        await callback_query.message.edit_text(
+            text = (
+                f"{vacancy_info_list[0]}\n"
+                f"Город: {vacancy_info_list[1]}\n"
+                f"Занятость: {vacancy_info_list[2]}\n"
+                f"Компания: {vacancy_info_list[3]}\n"
+                f"Опыт работы: {vacancy_info_list[4]}"
+                ),
+            reply_markup=await ikb_updated(
+                text=f"{len(vacancy_info)}",
+                num=len(vacancy_info)
+            )
         )
         dictionary[id_user] = len(vacancy_info) - 1
+
     else:
         vacancy_info_list = vacancy_info[dictionary[id_user] - 1]
 
         await callback_query.message.edit_text(
-            text=f"{vacancy_info_list[0]}\nГород: {vacancy_info_list[1]}\nЗанятость: {vacancy_info_list[2]}\nКомпания: {vacancy_info_list[3]}\nОпыт работы: {vacancy_info_list[4]}",
-                                               
-         reply_markup=await ikb_updated(text=f"{dictionary[id_user] - 1}", num=len(vacancy_info))
-         )
+            text = (
+                f"{vacancy_info_list[0]}\n"
+                f"Город: {vacancy_info_list[1]}\n"
+                f"Занятость: {vacancy_info_list[2]}\n"
+                f"Компания: {vacancy_info_list[3]}\n"
+                f"Опыт работы: {vacancy_info_list[4]}"
+            ),
+            reply_markup=await ikb_updated(
+                text=f"{dictionary[id_user] - 1}",
+                num=len(vacancy_info)
+            )
+        )
         dictionary[id_user] -= 1
+     
     await callback_query.answer()
 
 
@@ -77,6 +111,7 @@ async def callback_page(callback_query: CallbackQuery):
 
 @router.callback_query(F.data == 'next')
 async def callback_next(callback_query: CallbackQuery):
+
     id_user = callback_query.from_user.id
     vacancy = words_dic[id_user]
     vacancy_info = searching_vac(vacancy, query='all')
@@ -84,19 +119,37 @@ async def callback_next(callback_query: CallbackQuery):
     if dictionary[id_user] == len(vacancy_info)-1:
         vacancy_info_list = vacancy_info[0]
 
-        await callback_query.message.edit_text(text=f"{vacancy_info_list[0]}\nГород: {vacancy_info_list[1]}\nЗанятость: {vacancy_info_list[2]}\nКомпания: {vacancy_info_list[3]}\nОпыт работы: {vacancy_info_list[4]}",
-                                                
-        reply_markup=await ikb_updated(text=f"{0}", num=len(vacancy_info))
+        await callback_query.message.edit_text(
+            text = (
+                f"{vacancy_info_list[0]}\n"
+                f"Город: {vacancy_info_list[1]}\n"
+                f"Занятость: {vacancy_info_list[2]}\n"
+                f"Компания: {vacancy_info_list[3]}\n"
+                f"Опыт работы: {vacancy_info_list[4]}"
+            ),
+            reply_markup=await ikb_updated(
+                text=f"{0}",
+                num=len(vacancy_info)
+            )
         )
         dictionary[id_user] = 0
+        
     else:
         vacancy_info_list = vacancy_info[dictionary[id_user]+1]
 
         await callback_query.message.edit_text(
-            text=f"{vacancy_info_list[0]}\nГород: {vacancy_info_list[1]}\nЗанятость: {vacancy_info_list[2]}\nКомпания: {vacancy_info_list[3]}\nОпыт работы: {vacancy_info_list[4]}",
-                                               
-         reply_markup=await ikb_updated(text=f"{dictionary[id_user] + 1}", num=len(vacancy_info))
-         )
-            
+            text = (
+                f"{vacancy_info_list[0]}\n"
+                f"Город: {vacancy_info_list[1]}\n"
+                f"Занятость: {vacancy_info_list[2]}\n"
+                f"Компания: {vacancy_info_list[3]}\n"
+                f"Опыт работы: {vacancy_info_list[4]}"
+            ),
+            reply_markup=await ikb_updated(
+                text=f"{dictionary[id_user] + 1}",
+                num=len(vacancy_info)
+            )
+        )   
         dictionary[id_user] += 1
+    
     await callback_query.answer()    
