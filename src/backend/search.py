@@ -28,27 +28,22 @@ def searching_vac(vac_name, query):
     filtered_vacancies = []
     vacancies = response.json()['items']
     for vacancy in vacancies:
-        name = vacancy['name']
-        area = vacancy['area']['name']
-        schedule = vacancy['schedule']['name']
-        employer = vacancy['employer']['name']
-        experience = vacancy['experience']['name']
 
         new_vacancy_data = Table(
-            name = name,
-            area = area,
-            schedule = schedule,
-            employer = employer,
-            experience = experience,
+            name = vacancy['name'],
+            area = vacancy['area']['name'],
+            schedule = vacancy['schedule']['name'],
+            employer = vacancy['employer']['name'],
+            experience = vacancy['experience']['name'],
         )
         session.add(new_vacancy_data)
 
         filtered_vacancies.append({
-            'name': name,
-            'area': area,
-            'schedule': schedule,
-            'employer': employer,
-            'experience': experience
+            'name': vacancy['name'],
+            'area': vacancy['area']['name'],
+            'schedule': vacancy['schedule']['name'],
+            'employer': vacancy['employer']['name'],
+            'experience': vacancy['experience']['name'],
         })
     session.commit()
 
