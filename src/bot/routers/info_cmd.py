@@ -25,6 +25,15 @@ async def ikb_updated(text: str, num: int):
     inline_keyboard = InlineKeyboardMarkup(inline_keyboard=keyboard)
     return inline_keyboard
 
+async def text_body(list):
+    text = (
+        f"{list[0]}\n"
+        f"Город: {list[1]}\n"
+        f"Занятость: {list[2]}\n"
+        f"Компания: {list[3]}\n"
+        f"Опыт работы: {list[4]}"
+    )
+    return text
 
 @router.message(Command('info'))
 async def handler_search(message: types.Message, state: FSMContext):
@@ -44,13 +53,7 @@ async def process_first(message: types.Message, state: FSMContext):
     vacancy_info_list = vacancy_info[dictionary[id_user]]
     
     await message.answer(
-        text = (
-            f"{vacancy_info_list[0]}\n"
-            f"Город: {vacancy_info_list[1]}\n"
-            f"Занятость: {vacancy_info_list[2]}\n"
-            f"Компания: {vacancy_info_list[3]}\n"
-            f"Опыт работы: {vacancy_info_list[4]}"
-        ),
+        text = (text_body(vacancy_info_list)),
         reply_markup = await ikb_updated(
             text=f"{dictionary[id_user]}",
             num=len(vacancy_info)
@@ -69,13 +72,7 @@ async def callback_previous(callback_query: CallbackQuery):
         vacancy_info_list = vacancy_info[len(vacancy_info)-1]
 
         await callback_query.message.edit_text(
-            text = (
-                f"{vacancy_info_list[0]}\n"
-                f"Город: {vacancy_info_list[1]}\n"
-                f"Занятость: {vacancy_info_list[2]}\n"
-                f"Компания: {vacancy_info_list[3]}\n"
-                f"Опыт работы: {vacancy_info_list[4]}"
-                ),
+            text = (text_body(vacancy_info_list)),
             reply_markup=await ikb_updated(
                 text=f"{len(vacancy_info)}",
                 num=len(vacancy_info)
@@ -87,13 +84,7 @@ async def callback_previous(callback_query: CallbackQuery):
         vacancy_info_list = vacancy_info[dictionary[id_user] - 1]
 
         await callback_query.message.edit_text(
-            text = (
-                f"{vacancy_info_list[0]}\n"
-                f"Город: {vacancy_info_list[1]}\n"
-                f"Занятость: {vacancy_info_list[2]}\n"
-                f"Компания: {vacancy_info_list[3]}\n"
-                f"Опыт работы: {vacancy_info_list[4]}"
-            ),
+            text = (text_body(vacancy_info_list)),
             reply_markup=await ikb_updated(
                 text=f"{dictionary[id_user] - 1}",
                 num=len(vacancy_info)
@@ -120,13 +111,7 @@ async def callback_next(callback_query: CallbackQuery):
         vacancy_info_list = vacancy_info[0]
 
         await callback_query.message.edit_text(
-            text = (
-                f"{vacancy_info_list[0]}\n"
-                f"Город: {vacancy_info_list[1]}\n"
-                f"Занятость: {vacancy_info_list[2]}\n"
-                f"Компания: {vacancy_info_list[3]}\n"
-                f"Опыт работы: {vacancy_info_list[4]}"
-            ),
+            text = (text_body(vacancy_info_list)),
             reply_markup=await ikb_updated(
                 text=f"{0}",
                 num=len(vacancy_info)
@@ -138,13 +123,7 @@ async def callback_next(callback_query: CallbackQuery):
         vacancy_info_list = vacancy_info[dictionary[id_user]+1]
 
         await callback_query.message.edit_text(
-            text = (
-                f"{vacancy_info_list[0]}\n"
-                f"Город: {vacancy_info_list[1]}\n"
-                f"Занятость: {vacancy_info_list[2]}\n"
-                f"Компания: {vacancy_info_list[3]}\n"
-                f"Опыт работы: {vacancy_info_list[4]}"
-            ),
+            text = (text_body(vacancy_info_list)),
             reply_markup=await ikb_updated(
                 text=f"{dictionary[id_user] + 1}",
                 num=len(vacancy_info)
