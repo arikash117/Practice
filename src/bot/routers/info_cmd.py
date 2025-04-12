@@ -53,7 +53,7 @@ async def process_first(message: types.Message, state: FSMContext):
     vacancy_info_list = vacancy_info[dictionary[id_user]]
     
     await message.answer(
-        text = (text_body(vacancy_info_list)),
+        text = (await text_body(vacancy_info_list)),
         reply_markup = await ikb_updated(
             text=f"{dictionary[id_user]}",
             num=len(vacancy_info)
@@ -72,8 +72,8 @@ async def callback_previous(callback_query: CallbackQuery):
         vacancy_info_list = vacancy_info[len(vacancy_info)-1]
 
         await callback_query.message.edit_text(
-            text = (text_body(vacancy_info_list)),
-            reply_markup=await ikb_updated(
+            text = (await text_body(vacancy_info_list)),
+            reply_markup = await ikb_updated(
                 text=f"{len(vacancy_info)}",
                 num=len(vacancy_info)
             )
@@ -84,8 +84,8 @@ async def callback_previous(callback_query: CallbackQuery):
         vacancy_info_list = vacancy_info[dictionary[id_user] - 1]
 
         await callback_query.message.edit_text(
-            text = (text_body(vacancy_info_list)),
-            reply_markup=await ikb_updated(
+            text = (await text_body(vacancy_info_list)),
+            reply_markup = await ikb_updated(
                 text=f"{dictionary[id_user] - 1}",
                 num=len(vacancy_info)
             )
@@ -111,8 +111,8 @@ async def callback_next(callback_query: CallbackQuery):
         vacancy_info_list = vacancy_info[0]
 
         await callback_query.message.edit_text(
-            text = (text_body(vacancy_info_list)),
-            reply_markup=await ikb_updated(
+            text = (await text_body(vacancy_info_list)),
+            reply_markup = await ikb_updated(
                 text=f"{0}",
                 num=len(vacancy_info)
             )
@@ -123,8 +123,8 @@ async def callback_next(callback_query: CallbackQuery):
         vacancy_info_list = vacancy_info[dictionary[id_user]+1]
 
         await callback_query.message.edit_text(
-            text = (text_body(vacancy_info_list)),
-            reply_markup=await ikb_updated(
+            text = (await text_body(vacancy_info_list)),
+            reply_markup = await ikb_updated(
                 text=f"{dictionary[id_user] + 1}",
                 num=len(vacancy_info)
             )
