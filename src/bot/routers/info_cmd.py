@@ -33,7 +33,7 @@ async def handler_search(message: types.Message, state: FSMContext):
 
 
 @router.message(Time.first)
-async def procces_first(message: types.Message, state: FSMContext):
+async def process_first(message: types.Message, state: FSMContext):
     await state.update_data(name=message.text)
     await state.set_state(Time.info_vacancy)
 
